@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-
+import { useNavigate } from 'react-router-dom';
 const Login = (props) =>{
    
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
+    let navigate = useNavigate();
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -18,15 +19,16 @@ const Login = (props) =>{
             body : JSON.stringify(User)
         }).then((res)=>res.json())
         .then((data)=>{
+            console.log(data);
             console.log(data.data.token);
             localStorage.setItem("token",data.data.token)
-            // if (data.message === "success"){
+           
+            if (data.message === "success"){
 
-            //     props.history.push("/home")
+                navigate('/home');
 
-            // }
+            }
         })
-
         
     }
     return(

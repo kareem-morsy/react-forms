@@ -17,9 +17,10 @@ function Home() {
 
   const fetchData = useCallback(async()=>{
     try {
-      const res = await authaxios.get("https://reservation-system.sabeelan.com/reservation-system/api/en/banks?id=2&name=HSB&accountNumber=2222&isActive=Active");
+      const res = await authaxios.get("https://reservation-system.sabeelan.com/reservation-system/api/en/banks");
       console.log(res)
-      setBanks(res.data)
+      setBanks(res.data.data)
+      console.log(banks)
     }
     catch(err){
       console.log(err)
@@ -36,7 +37,13 @@ function Home() {
   // },[])
   return (
     <>
-    
+      {banks.map((x)=>{
+        return(
+          <div>
+            <h1>{x.name}</h1>
+          </div>
+        )
+      })}
     </>
   )
 }
